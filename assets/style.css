@@ -11,10 +11,14 @@ body {
 .player2mao, .player1mao {
     display:flex;
     flex-direction:row;
+    justify-content: center;
     gap:10px;
     height:auto;
     width:auto;
     border:2px solid #000000;
+    margin:5px;
+    padding:5px;
+    gap:10px;
 }
 
 .player2tabuleiro, .player1tabuleiro {
@@ -40,6 +44,8 @@ body {
 }
 
 .card {
+    width:auto;
+    height:120px;
     border:2px strong #000000;
     display: flex;
     flex-direction: column;
