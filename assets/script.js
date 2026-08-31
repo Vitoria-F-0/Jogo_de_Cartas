@@ -15,7 +15,9 @@ const baralho = [
 ];
 
 function criarCartas() {
+
     const baralhoPronto = []
+
     baralho.forEach(element => {
         const carta = document.createElement('div')
         carta.classList.add('card')
@@ -25,21 +27,50 @@ function criarCartas() {
         <div>Posição: ${element.posicao}</div>`
         baralhoPronto.push(carta)
     })
+    
     return baralhoPronto
 }
 
 function randomizarBaralho(baralhoPronto) {
-    baralhoPronto.Math.floor(Math.random() *10)
-    return
-}
 
-/*function exibirCartas(randomizarBaralho) {  
-    for (let i = 0; i <5; i++) {
-        const cartaSorteada = cartasEmbaralhadas[i]
+    const baralhoRandom = []
+
+    while (baralhoRandom.length < 10) {
+        const indice = Math.floor(
+            Math.random() * baralhoPronto.length
+        )
+
+        const cartaSorteada = baralhoPronto[indice]
+
+        if (!baralhoRandom.includes(cartaSorteada)) {
+            baralhoRandom.push(cartaSorteada)
+        }
     }
-    
-    push.maoPlayer2.appendChild(randomizarBaralho)
-    push.maoPlayer1.appendChild(randomizarBaralho)
+
+    return baralhoRandom
 }
 
-exibirCartas() */
+function exibirCartas(baralhoPronto) {
+    const resultadoPlayer1 = randomizarBaralho(baralhoPronto)
+    const resultadoPlayer2 = randomizarBaralho(baralhoPronto)
+    const baralhoExibir1 = []
+    const baralhoExibir2 = []
+
+    for (let i = 0; i <5; i++) {
+        baralhoExibir2.push(resultadoPlayer2[i])
+        baralhoExibir1.push(resultadoPlayer1[i])
+    }
+
+    baralhoExibir2.forEach(card => {
+        card.innerHTML
+        maoPlayer2.appendChild(card)
+    })
+   
+
+    baralhoExibir1.forEach(card => {
+        card.innerHTML
+        maoPlayer1.appendChild(card)
+    })
+}
+
+exibirCartas(randomizarBaralho(criarCartas()))
