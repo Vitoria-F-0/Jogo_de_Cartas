@@ -14,33 +14,28 @@ const baralho = [
     {nome: "Zoltan Chivay", forca: 5, posicao: "neutra"}
 ];
 
-function criarCartas() {
+function criarCartas(element) {
 
-    const baralhoPronto = []
-
-    baralho.forEach(element => {
         const carta = document.createElement('div')
         carta.classList.add('card')
         carta.innerHTML = 
         `<div>Nome: ${element.nome}</div> 
         <div>Poder: ${element.forca}</div> 
         <div>Posição: ${element.posicao}</div>`
-        baralhoPronto.push(carta)
-    })
     
-    return baralhoPronto
+    return carta
 }
 
-function randomizarBaralho(baralhoPronto) {
+function randomizarBaralho() {
 
     const baralhoRandom = []
 
     while (baralhoRandom.length < 10) {
         const indice = Math.floor(
-            Math.random() * baralhoPronto.length
+            Math.random() * baralho.length
         )
 
-        const cartaSorteada = baralhoPronto[indice]
+        const cartaSorteada = baralho[indice]
 
         if (!baralhoRandom.includes(cartaSorteada)) {
             baralhoRandom.push(cartaSorteada)
@@ -50,27 +45,31 @@ function randomizarBaralho(baralhoPronto) {
     return baralhoRandom
 }
 
-function exibirCartas(baralhoPronto) {
-    const resultadoPlayer1 = randomizarBaralho(baralhoPronto)
-    const resultadoPlayer2 = randomizarBaralho(baralhoPronto)
+function exibirCartas() {
+    const resultadoPlayer1 = randomizarBaralho()
+    const resultadoPlayer2 = randomizarBaralho()
     const baralhoExibir1 = []
     const baralhoExibir2 = []
 
     for (let i = 0; i <5; i++) {
-        baralhoExibir2.push(resultadoPlayer2[i])
-        baralhoExibir1.push(resultadoPlayer1[i])
+
+        const cartaPlayer2 = criarCartas(resultadoPlayer2[i])
+        const cartaPlayer1 = criarCartas(resultadoPlayer1[i])
+
+        criarCartas(resultadoPlayer2)
+        baralhoExibir2.push(cartaPlayer2)
+        criarCartas(resultadoPlayer1)
+        baralhoExibir1.push(cartaPlayer1)
     }
 
     baralhoExibir2.forEach(card => {
-        card.innerHTML
         maoPlayer2.appendChild(card)
     })
    
 
     baralhoExibir1.forEach(card => {
-        card.innerHTML
         maoPlayer1.appendChild(card)
     })
 }
 
-exibirCartas(randomizarBaralho(criarCartas()))
+exibirCartas()
